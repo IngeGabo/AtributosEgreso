@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     const atributos = {
         "Informática": [
-            "AE1 Sistemas de Software: Implementa y administra sistemas de software de calidad mundial con base en la Ingeniería de Software para solucionar problemas de manipulación de datos, información y conocimiento en las organizaciones con base en la adaptabilidad en el uso de nuevas tecnologías debido a los cambios tecnológicos, propiciando el trabajo colaborativo, la disciplina, la proactividad, fomenta la ética profesional y el respeto.",
+            "AE1 1 Sistemas de Software: Implementa y administra sistemas de software de calidad mundial con base en la Ingeniería de Software para solucionar problemas de manipulación de datos, información y conocimiento en las organizaciones con base en la adaptabilidad en el uso de nuevas tecnologías debido a los cambios tecnológicos, propiciando el trabajo colaborativo, la disciplina, la proactividad, fomenta la ética profesional y el respeto.",
             "AE2 Infraestructura Computacional: Desarrolla la infraestructura computacional requerida para el diseño e implementación de las soluciones de software/hardware, fomenta la autonomía, la visión autocrítica, la ética profesional.",
             "AE3 Modelado de datos: Modela datos e información que sea de fácil implementación en las tecnologías apropiadas para optimizar su manipulación, fomenta la creatividad, la visión crítica y autocrítica, la responsabilidad, la disciplina, la ética profesional y el trabajo colaborativo.",
             "AE4 Soluciones de Hardware: Diseña soluciones de hardware e interfaces para la adquisición y manipulación de datos, promueve el trabajo en equipo, la tolerancia, la equidad, la responsabilidad y la ética profesional.",
@@ -39,6 +39,52 @@ document.addEventListener('DOMContentLoaded', function () {
         ]
     };
 
+    const planese = {
+        "Informática": {
+            "name": "Ingeniería en Informática",
+            "icono": "Images/Iconos/ico-ig-informatica.png"
+        },
+        "Industrial": {
+            "name": "Ingeniería Industrial",
+            "icono": "Images/Iconos/ico-ig-industrial.png"
+        },
+        "Transporte": {
+            "name": "Ingeniería en Transporte",
+            "icono": "Images/Iconos/ico-transporte.png"
+        }
+    };
+    
+    
+        const buttons = document.querySelectorAll('.plans');
+        buttons.forEach(button => {
+            const plan = button.getAttribute('data-plan');
+            console.log(`Processing plan: ${plan}`);
+            const planData = planese[plan];
+            console.log(`Plan data:`, planData);
+            
+            if (planData) {
+                const imgElement = button.querySelector('.icon-image');
+                const nameElement = button.querySelector('.nombre-plan b');
+                
+                console.log(`Setting image src to: ${planData.icono}`);
+                console.log(`Setting text content to: ${planData.name}`);
+                imgElement.src = planData.icono;
+                imgElement.alt = planData.name;
+                nameElement.textContent = planData.name;
+            } else {
+                console.error(`No data found for plan: ${plan}`);
+            }
+        });
+
+    
+    
+    
+    
+    
+    
+    
+    
+
     function showLoader() {
         var loader = document.getElementById('loader');
         loader.style.display = 'block';
@@ -57,13 +103,14 @@ document.addEventListener('DOMContentLoaded', function () {
             resultParagraph.innerHTML = 'Selecciona una unidad de aprendizaje válida.';
             return;
         }
-
+    
         const planAttributes = atributos[plan];
         if (!planAttributes) {
             resultParagraph.innerHTML = 'No hay atributos disponibles para este plan.';
+            resultParagraph.classList.add('animated-text');
             return;
         }
-
+    
         let attributesToShow = [];
         for (let i = 1; i < unidadData.length; i++) {
             if (unidadData[i] !== '' && unidadData[i] !== undefined) {
@@ -73,30 +120,38 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         }
-
+    
+        // Clear previous content and remove animation class to reset animation
+        
+        resultParagraph.classList.remove('animated-text');
+    
         if (attributesToShow.length > 0) {
             attributesToShow.forEach(attribute => {
-                const parts = attribute.split(': ');
-                const span1 = document.createElement('span');
-                span1.classList.add('highlight');
-                span1.textContent = parts[0] + ': ';
-
-                const br = document.createElement('br'); // Crear un elemento de salto de línea
-
-                const span2 = document.createElement('span');
-                span2.textContent = parts[1];
-
                 const p = document.createElement('p');
-                p.appendChild(span1);
-                p.appendChild(br);
-                p.appendChild(span2);
+                const br = document.createElement('br');
+                const [title, ...text] = attribute.split(': ');
+                const b = document.createElement('b');
+                
+                b.textContent = title + ': ';
+                b.appendChild(br);
+                b.classList.add('atributo2');
+                p.appendChild(b);
+                p.appendChild(document.createTextNode(text.join(': ')));
                 p.classList.add('atributo');
+                
                 resultParagraph.appendChild(p);
+            });
+    
+            // Add animation class after adding new content
+            requestAnimationFrame(() => {
+                resultParagraph.classList.add('animated-text');
             });
         } else {
             resultParagraph.innerHTML = 'La unidad seleccionada no contribuye a ningún atributo de egreso conocido.';
+            resultParagraph.classList.add('animated-text');
         }
     }
+    
 
     function cargarUnidades(plan) {
         fetch(`${scriptURL}?action=unidades&plan=${plan}`)
@@ -135,11 +190,19 @@ document.addEventListener('DOMContentLoaded', function () {
             this.classList.add('active'); // Add active class to the clicked button
             
             const plan = this.getAttribute('data-plan');
-            const iconSrc = this.querySelector('img').src; // Obtener la fuente del ícono del plan seleccionado
-            planIcon.src = iconSrc; // Establecer la fuente del ícono
-            planIcon.style.display = 'block'; // Mostrar el ícono
-            planText.textContent = `Ing. ${plan}`; // Establecer el texto del plan
-            planText.style.display = 'block';
+            const planData = planese[plan]; // Obtener datos del JSON
+            
+            if (planData) {
+                planIcon.src = planData.icono; // Establecer la fuente del ícono desde el JSON
+                planIcon.alt = planData.name; // Establecer el texto alternativo del ícono
+                planIcon.style.display = 'block'; // Mostrar el ícono
+
+                planText.textContent = planData.name; // Establecer el texto del plan desde el JSON
+                planText.style.display = 'block'; // Mostrar el texto del plan
+            } else {
+                console.error(`No data found for plan: ${plan}`);
+            }
+
             document.getElementById('unidad').value = '';
 
             cargarUnidades(plan);
@@ -170,11 +233,11 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (nivelMap[nivel]) {
                         nivel = nivelMap[nivel];
                     }
-                    contribuciones.push(`<span class="resultado-atributo"> Atributo ${i}: ${headers[i]}</span> <span class="texto">con un nivel </span><span class="resultado-nivel">${nivel}</span>`);
+                    contribuciones.push(`<span class="resultado-atributo"> AE ${i}: ${headers[i]}</span> <span class="texto">con un nivel </span><span class="resultado-nivel">${nivel}</span>`);
                 }
             }
             if (contribuciones.length > 0) {
-                resultParagraph.innerHTML = `<span class="texto">La unidad </span> <span class="resultado">'${selectedUnidad}'</span> <span class="texto">contribuye a:</span><br>-${contribuciones.join('<br>-')}`;
+                resultParagraph.innerHTML = `<span class="texto">La unidad </span> <span class="resultado">'${selectedUnidad}'</span> <span class="texto">contribuye a:</span><br>-${contribuciones.join('<br>-')}<br>`;
                 displayAttributes(document.querySelector('button[data-plan].active')?.getAttribute('data-plan'));
             } else {
                 resultParagraph.innerHTML = `La unidad '${selectedUnidad}' no contribuye a ningún atributo de egreso conocido.`;

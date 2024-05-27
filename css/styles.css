@@ -114,7 +114,7 @@ form p {
 
 /* Estilo para los niveles de contribución */
 .resultado-nivel {
-  color: #00833d;
+  color: #008854;
   font-weight: bold;
   font-size: 15px;
 }
@@ -125,20 +125,21 @@ form p {
   color: #6f1c46; /* Color rojo del IPN */
   font-size: 15px;
 }
-
+/*Texto extra en el resultado*/
 .texto{
   font-size: 15px;
   color: #000000;
   
 }
+/*Resultado es la materia que se muestra en el resultado*/
 .resultado{
   margin-top: 10px;
   font-weight: bold;
-  color: #2e2aba; /* Color rojo del IPN */
+  color: #2e2aba; 
   font-size: 15px;
 }
-
-#informaticaB{
+/*Estilo para los botones de los planes de estudio*/
+#informaticaB, #industrialB, #transporteB {
     background-color: #ffffff;
     color: #000000;
     padding: 10px 0;
@@ -146,68 +147,53 @@ form p {
     position: relative;
     margin-bottom: 20px;
     border-color: #ffffff;
+    margin-right: 50px; /* Agrega un margen derecho de 10px entre los botones */
+    margin-top: 50px;
+    align-items: center;
 }
 
-#industrialB{
-    background-color: #ffffff;
-    color: #000000;
-    padding: 10px 0;
-    text-align: center;
-    position: relative;
-    margin-bottom: 20px;
-    border-color: #ffffff;
-}
 
-#transporteB{
-    background-color: #ffffff;
-    color: #000000;
-    padding: 10px 0;
-    text-align: center;
-    position: relative;
-    margin-bottom: 20px;
-    border-color: #ffffff;
-}
+/*Estilo para los botones de los planes de estudio*/
 #planes {
   display: flex; /* Asegúrate de que los botones estén en línea */
   justify-content: center; /* Centra los botones horizontalmente */
   flex-wrap: wrap; /* Asegúrate de que los botones se envuelvan si no caben en una sola fila */
 }
 
-#planes button {
-  margin-right: 50px; /* Agrega un margen derecho de 10px entre los botones */
-  margin-top: 50px;
-  align-items: center;
-  
-}
 
+/*Es para el texto de la descripcion del atributo*/
 .atributo {
-  margin-top: 10px;
-  font-weight: bold;
+  margin-top: 40px;
+  /*font-weight: bold;*/
+  color: #000000; /* Color rojo del IPN */
   font-size: 15px;
   white-space: normal; /* Permitir que el texto se ajuste en varias líneas */
   overflow: visible; /* Asegurarse de que el contenido no se corte */
+  
+  padding: 3px 10px;
+  
 }
 
-.highlight {
-  background-color: green;
-  color: yellow;
+/*Es para el texto del nombre del atributo*/
+.atributo2 {
+  margin-top: 10px;
   font-weight: bold;
+  color: #ffff00; /* Color rojo del IPN */
+  font-size: 15px;
+  white-space: normal; /* Permitir que el texto se ajuste en varias líneas */
+  overflow: visible; /* Asegurarse de que el contenido no se corte */
+  background-color: #008000;
+
 }
 
-.atributo span:last-child {
-  color: black;
-  font-weight: normal;
-}
-
-
-
+/*Estilo para los iconos de los planes de estudio*/
 .icono-plan {
   margin-bottom: 10px; /* Espacio entre el icono y el nombre del plan */
   
 }
-
+/*Estilo para los nombres de los planes de estudio*/
 .nombre-plan {
-  font-size: 14px; /* Tamaño de fuente del nombre del plan */
+  font-size: 15px; /* Tamaño de fuente del nombre del plan */
   padding: 10px; /* Agregar relleno alrededor del texto */
 }
 
@@ -219,67 +205,18 @@ form p {
 
 }
 
-
-
-/* Ajuste del contenedor del resultado para asegurarse de que no se corte el contenido */
 #resultado {
   display: none;
   margin-top: 20px; /* Agregar margen superior */
   padding: 10px; /* Agregar relleno alrededor del contenido */
-  border: 0px solid #005f39; /* Agregar borde sólido */
+  border: 0px solid #000d5f; /* Agregar borde sólido */
   border-radius: 0px; /* Agregar bordes redondeados */
-  background-color: #fff; /* Color de fondo */
-  color: #131602; /* Color de texto */
-  font-size: 16px; /* Tamaño de fuente */
   width: 100%; /* Asegurarse de que ocupe todo el ancho disponible */
-  overflow: auto; /* Asegurarse de que el contenido no se corte y permita el desplazamiento si es necesario */
+  overflow: visible; /* Asegurarse de que el contenido no se corte */
   word-wrap: break-word; /* Permitir que las palabras largas se dividan en varias líneas */
-  box-sizing: border-box; /* Asegurarse de que el padding y el border estén incluidos en el ancho y alto */
 }
 
-/* Ajuste del tamaño de fuente y del contenedor para pantallas medianas */
-@media (max-width: 768px) {
-  #resultado {
-    font-size: 13px; /* Tamaño de fuente más pequeño en pantallas medianas */
-    padding: 8px; /* Relleno ajustado */
-  }
-  .resultado-atributo{
-    font-size: 13px;
-  }
-  .resultado-nivel{
-    font-size: 13px;
-  }
-  .texto{
-    font-size: 13px;
-  }
-  .resultado{
-    font-size: 15px;
-  }
-}
-
-/* Ajuste del tamaño de fuente y del contenedor para pantallas pequeñas */
-@media (max-width: 480px) {
-  #resultado {
-    font-size: 11px; /* Tamaño de fuente más pequeño en pantallas pequeñas */
-    padding: 6px; /* Relleno ajustado */
-  }
-  .resultado-atributo{
-    font-size: 11px;
-  }
-  .resultado-nivel{
-    font-size: 11px;
-  }
-  .texto{
-    font-size: 11px;
-  }
-  .resultado{
-    font-size: 13px;
-  }
-}
-
-
-
-
+/*Boton de regresar*/
 .back-button {
   display: block; /* Asegúrate de que el botón sea un bloque para posicionarlo correctamente */
   margin: 20px 0; /* Centra el botón horizontalmente */
@@ -292,8 +229,6 @@ form p {
   font-size: 20px; /* Tamaño de fuente para la flecha */
   align-self: left;
 }
-
-
 
 .back-button:hover {
   background-color: #5a1538; /* Cambia el color de fondo al pasar el ratón */
@@ -333,9 +268,11 @@ form p {
   overflow: hidden;
   white-space: nowrap;
   border-right: 0.15em solid black;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+  animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+  
 }
 
+/*Estilo para el input de la unidad de aprendizaje cuando no esta seleccionado*/
 #unidad {
   background-color: #C6E2F5; /* Cambia el color de fondo */
   border: 1px solid #00796b; /* Cambia el color del borde */
@@ -347,51 +284,12 @@ form p {
   box-sizing: border-box; /* Asegura que el relleno y el borde se incluyan en el ancho total */
 }
 
+/*Interior del input cuando esta seleccionado*/
 #unidad:focus {
   background-color: #b2ebf2; /* Cambia el color de fondo cuando el input está enfocado */
   border-color: #004d40; /* Cambia el color del borde cuando el input está enfocado */
   outline: none; /* Elimina el borde de enfoque predeterminado */
 }
 
-#banner {
-  display: none; 
-  justify-content: center; 
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-#banner2 {
-  display: none; 
-  justify-content: center; 
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
-#banner3 {
-  display: none; 
-  justify-content: center; 
-  align-items: flex-start;
-  flex-wrap: wrap;
-}
 
-/* Estilo para las imágenes del banner */
-#banner img, #banner2 img, #banner3 img {
-  width: 30%;
-  height: 30%;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid #000000;
-  margin: 0 10px; /* Margen horizontal para separar las imágenes */
-  animation: fadeInOutBannerImages 6s ease-in-out forwards; /* Aplica la animación */
-}
 
-/* Animación para las imágenes del banner */
-@keyframes fadeInOutBannerImages {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
